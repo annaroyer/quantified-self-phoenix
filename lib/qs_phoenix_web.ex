@@ -22,7 +22,6 @@ defmodule QsPhoenixWeb do
       use Phoenix.Controller, namespace: QsPhoenixWeb
       import Plug.Conn
       import QsPhoenixWeb.Router.Helpers
-      import QsPhoenixWeb.Gettext
     end
   end
 
@@ -36,7 +35,6 @@ defmodule QsPhoenixWeb do
 
       import QsPhoenixWeb.Router.Helpers
       import QsPhoenixWeb.ErrorHelpers
-      import QsPhoenixWeb.Gettext
     end
   end
 
@@ -51,7 +49,6 @@ defmodule QsPhoenixWeb do
   def channel do
     quote do
       use Phoenix.Channel
-      import QsPhoenixWeb.Gettext
     end
   end
 
