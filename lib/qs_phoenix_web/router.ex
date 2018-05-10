@@ -5,7 +5,9 @@ defmodule QsPhoenixWeb.Router do
     plug :accepts, ["json"]
   end
 
-  scope "/api", QsPhoenixWeb do
+  scope "/api/v1", QsPhoenixWeb do
     pipe_through :api
+
+    resources "/foods", FoodController, except: [:new, :edit]
   end
 end
