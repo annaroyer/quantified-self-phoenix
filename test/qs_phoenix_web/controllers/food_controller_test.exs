@@ -18,18 +18,7 @@ defmodule QsPhoenixWeb.FoodControllerTest do
   end
 
   describe "index" do
-    @tag individual_test: "index"
     test "lists all foods", %{conn: conn} do
-      foods = [ %{name: "Banana", calories: 150},
-                %{name: "Bagel Bites - Four Cheese", calories: 650},
-                %{name: "Chicken Burrito", calories: 800},
-                %{name: "Yogurt", calories: 550},
-                %{name: "Gum", calories: 50},
-                %{name: "Cheese", calories: 400},
-                %{name: "Apple", calories: 220} ]
-
-      Enum.each(foods, fn food -> Foods.create_food(food) end )
-
       conn = get conn, food_path(conn, :index)
 
       expected = [%{"id" => 1, "name" => "Banana", "calories" => 150},
@@ -44,16 +33,28 @@ defmodule QsPhoenixWeb.FoodControllerTest do
     end
   end
 
+  describe "show food" do
+    test "renders food with given id" do
+      conn = get build_conn(), food_path(build_conn(), :show, 1)
+      assert json_response(conn, 200) == %{"id" => 1, "name" => "Banana", "calories" => 150}
+    end
+
+    test "renders food with different given id" do
+      conn = get build_conn(), food_path(build_conn(), :show, 4)
+      assert json_response(conn, 200) == %{"id" => 4, "calories" => 550, "name" => "Yogurt"}
+    end
+
+    test "returns 404 when food with given id does not exist" do
+      assert_error_sent :not_found, fn ->
+         get build_conn(), food_path(build_conn(), :show, 9)
+       end
+    end
+  end
+
   # describe "create food" do
   #   test "renders food when data is valid", %{conn: conn} do
   #     conn = post conn, food_path(conn, :create), food: @create_attrs
   #     assert %{"id" => id} = json_response(conn, 201)["data"]
-  #
-  #     conn = get conn, food_path(conn, :show, id)
-  #     assert json_response(conn, 200)["data"] == %{
-  #       "id" => id,
-  #       "calories" => 42,
-  #       "name" => "some name"}
   #   end
   #
   #   test "renders errors when data is invalid", %{conn: conn} do
@@ -61,7 +62,8 @@ defmodule QsPhoenixWeb.FoodControllerTest do
   #     assert json_response(conn, 422)["errors"] != %{}
   #   end
   # end
-  #
+
+
   # describe "update food" do
   #   setup [:create_food]
   #

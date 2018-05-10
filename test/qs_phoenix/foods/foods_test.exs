@@ -6,9 +6,16 @@ defmodule QsPhoenix.FoodsTest do
   describe "foods" do
     alias QsPhoenix.Foods.Food
 
-    @valid_attrs %{calories: 142, name: "Banana"}
+    @valid_attrs %{calories: 142, name: "Crackers"}
     @update_attrs %{calories: 243, name: "Chocolate Covered Banana"}
     @invalid_attrs %{calories: nil, name: nil}
+    @foods [%{name: "Banana",calories: 150},
+            %{name: "Bagel Bites - Four Cheese", calories: 650},
+            %{name: "Chicken Burrito", calories: 800},
+            %{name: "Yogurt", calories: 550},
+            %{name: "Gum", calories: 50},
+            %{name: "Cheese", calories: 400},
+            %{name: "Apple", calories: 220}]
 
     def food_fixture(attrs \\ %{}) do
       {:ok, food} =
@@ -20,20 +27,14 @@ defmodule QsPhoenix.FoodsTest do
     end
 
     test "list_foods/0 returns all foods" do
-      food_list = [ %{name: "Banana", calories: 150},
-                    %{name: "Bagel Bites - Four Cheese", calories: 650},
-                    %{name: "Chicken Burrito", calories: 800} ]
-
-      food = Enum.map(food_list, fn food -> food_fixture(food) end )
-
-      assert Foods.list_foods() == food
+      assert Enum.count(Foods.list_foods) == 7
     end
 
-    # test "get_food!/1 returns the food with given id" do
-    #   food = food_fixture()
-    #   assert Foods.get_food!(food.id) == food
-    # end
-    #
+    test "get_food!/1 returns the food with given id" do
+      food = food_fixture()
+      assert Foods.get_food!(food.id) == food
+    end
+
     # test "create_food/1 with valid data creates a food" do
     #   assert {:ok, %Food{} = food} = Foods.create_food(@valid_attrs)
     #   assert food.calories == 42
