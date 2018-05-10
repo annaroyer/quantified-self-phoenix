@@ -1,9 +1,6 @@
 defmodule QsPhoenixWeb.Endpoint do
   use Phoenix.Endpoint, otp_app: :qs_phoenix
 
-  socket "/socket", QsPhoenixWeb.UserSocket
-
-
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
   if code_reloading? do

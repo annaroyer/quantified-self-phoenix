@@ -34,7 +34,6 @@ defmodule QsPhoenix.Mixfile do
   defp deps do
     [
       {:phoenix, "~> 1.3.1"},
-      {:phoenix_pubsub, "~> 1.0"},
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:cowboy, "~> 1.0"}
@@ -51,7 +50,7 @@ defmodule QsPhoenix.Mixfile do
     [
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      "test": ["ecto.create --quiet", "ecto.migrate", "test"]
+      "test": ["ecto.drop --only individual_test:index", "ecto.create --quiet", "ecto.migrate", "test"]
     ]
   end
 end
