@@ -7,12 +7,10 @@ defmodule QsPhoenixWeb.FoodView do
   end
 
   def render("show.json", %{food: food}) do
-    %{data: render_one(food, FoodView, "food.json")}
+    render_one(food, FoodView, "food.json")
   end
 
   def render("food.json", %{food: food}) do
-    %{id: food.id,
-      name: food.name,
-      calories: food.calories}
+    %{id: food.id, name: food.name, calories: food.calories}
   end
 end
