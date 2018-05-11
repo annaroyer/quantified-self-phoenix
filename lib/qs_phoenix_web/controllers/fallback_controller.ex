@@ -8,7 +8,7 @@ defmodule QsPhoenixWeb.FallbackController do
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
     conn
-    |> put_status(:unprocessable_entity)
+    |> send_resp(:bad_request, "")
   end
 
   def call(conn, {:error, :not_found}) do
