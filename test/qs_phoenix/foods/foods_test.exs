@@ -9,13 +9,6 @@ defmodule QsPhoenix.FoodsTest do
     @valid_attrs %{calories: 142, name: "Crackers"}
     @update_attrs %{calories: 243, name: "Chocolate Covered Banana"}
     @invalid_attrs %{calories: nil, name: nil}
-    @all_foods [%{name: "Banana", calories: 150},
-                %{name: "Bagel Bites - Four Cheese", calories: 650},
-                %{name: "Chicken Burrito", calories: 800},
-                %{name: "Yogurt", calories: 550},
-                %{name: "Gum", calories: 50},
-                %{name: "Cheese", calories: 400},
-                %{name: "Apple", calories: 220}]
 
     def food_fixture(attrs \\ %{}) do
       {:ok, food} =
