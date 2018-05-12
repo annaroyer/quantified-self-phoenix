@@ -85,21 +85,20 @@ defmodule QsPhoenixWeb.FoodControllerTest do
       end
     end
   end
-  #
-  # describe "delete food" do
-  #   setup [:create_food]
-  #
-  #   test "deletes chosen food", %{conn: conn, food: food} do
-  #     conn = delete conn, food_path(conn, :delete, food)
-  #     assert response(conn, 204)
-  #     assert_error_sent 404, fn ->
-  #       get conn, food_path(conn, :show, food)
-  #     end
-  #   end
-  # end
-  #
-  defp create_food(_) do
-    food = fixture(:food)
-    {:ok, food: food}
+
+  describe "delete food" do
+    test "deletes chosen food", %{conn: conn} do
+      conn = delete conn, food_path(conn, :delete, 1)
+      assert response(conn, 204)
+      assert_error_sent 404, fn ->
+        get conn, food_path(conn, :show, 1)
+      end
+    end
+
+    test "returns a 404 when food with given id does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        delete conn, food_path(conn, :delete, 8)
+      end
+    end
   end
 end
