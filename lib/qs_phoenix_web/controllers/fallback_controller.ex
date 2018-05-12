@@ -7,8 +7,7 @@ defmodule QsPhoenixWeb.FallbackController do
   use QsPhoenixWeb, :controller
 
   def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
-    conn
-    |> send_resp(:bad_request, "")
+    send_resp(conn, :bad_request, "")
   end
 
   def call(conn, {:error, :not_found}) do
