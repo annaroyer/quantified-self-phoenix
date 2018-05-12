@@ -48,7 +48,8 @@ defmodule QsPhoenix.Mixfile do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      "ecto.setup": ["ecto.create --quiet", "ecto.migrate", "run priv/repo/seeds.exs"],
+      "ecto.seed": ["run priv/repo/seeds.exs"],
+      "ecto.setup": ["ecto.create --quiet", "ecto.migrate", "ecto.seed"],
       "ecto.reset": ["ecto.drop --quiet", "ecto.setup"],
       "test": ["ecto.reset", "test"]
     ]

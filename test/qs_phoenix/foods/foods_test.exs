@@ -9,13 +9,6 @@ defmodule QsPhoenix.FoodsTest do
     @valid_attrs %{calories: 142, name: "Crackers"}
     @update_attrs %{calories: 243, name: "Chocolate Covered Banana"}
     @invalid_attrs %{calories: nil, name: nil}
-    @foods [%{name: "Banana",calories: 150},
-            %{name: "Bagel Bites - Four Cheese", calories: 650},
-            %{name: "Chicken Burrito", calories: 800},
-            %{name: "Yogurt", calories: 550},
-            %{name: "Gum", calories: 50},
-            %{name: "Cheese", calories: 400},
-            %{name: "Apple", calories: 220}]
 
     def food_fixture(attrs \\ %{}) do
       {:ok, food} =
@@ -35,15 +28,15 @@ defmodule QsPhoenix.FoodsTest do
       assert Foods.get_food!(food.id) == food
     end
 
-    # test "create_food/1 with valid data creates a food" do
-    #   assert {:ok, %Food{} = food} = Foods.create_food(@valid_attrs)
-    #   assert food.calories == 42
-    #   assert food.name == "Banana"
-    # end
-    #
-    # test "create_food/1 with invalid data returns error changeset" do
-    #   assert {:error} = Foods.create_food(@invalid_attrs)
-    # end
+    test "create_food/1 with valid data creates a food" do
+      assert {:ok, %Food{} = food} = Foods.create_food(@valid_attrs)
+      assert food.calories == 142
+      assert food.name == "Crackers"
+    end
+
+    test "create_food/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Foods.create_food(@invalid_attrs)
+    end
     #
     # test "update_food/2 with valid data updates the food" do
     #   food = food_fixture()
