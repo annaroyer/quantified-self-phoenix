@@ -9,6 +9,13 @@ defmodule QsPhoenix.FoodsTest do
     @valid_attrs %{calories: 142, name: "Crackers"}
     @update_attrs %{calories: 243, name: "Chocolate Covered Banana"}
     @invalid_attrs %{calories: nil, name: nil}
+    @all_foods [%{name: "Banana", calories: 150},
+                %{name: "Bagel Bites - Four Cheese", calories: 650},
+                %{name: "Chicken Burrito", calories: 800},
+                %{name: "Yogurt", calories: 550},
+                %{name: "Gum", calories: 50},
+                %{name: "Cheese", calories: 400},
+                %{name: "Apple", calories: 220}]
 
     def food_fixture(attrs \\ %{}) do
       {:ok, food} =
@@ -35,22 +42,22 @@ defmodule QsPhoenix.FoodsTest do
     end
 
     test "create_food/1 with invalid data returns error changeset" do
-      assert {:error, %Ecto.Changeset{}} = Foods.create_food(@invalid_attrs)
+      assert {:error, %{}} = Foods.create_food(@invalid_attrs)
     end
-    #
-    # test "update_food/2 with valid data updates the food" do
-    #   food = food_fixture()
-    #   assert {:ok, food} = Foods.update_food(food, @update_attrs)
-    #   assert %Food{} = food
-    #   assert food.calories == 243
-    #   assert food.name == "Chocolate Covered Banana"
-    # end
-    #
-    # test "update_food/2 with invalid data returns error changeset" do
-    #   food = food_fixture()
-    #   assert {:error} = Foods.update_food(food, @invalid_attrs)
-    #   assert food == Foods.get_food!(food.id)
-    # end
+
+    test "update_food/2 with valid data updates the food" do
+      food = food_fixture()
+      assert {:ok, food} = Foods.update_food(food, @update_attrs)
+      assert %Food{} = food
+      assert food.calories == 243
+      assert food.name == "Chocolate Covered Banana"
+    end
+
+    test "update_food/2 with invalid data returns error changeset" do
+      food = food_fixture()
+      assert {:error, %{}} = Foods.update_food(food, @invalid_attrs)
+      assert food == Foods.get_food!(food.id)
+    end
     #
     # test "delete_food/1 deletes the food" do
     #   food = food_fixture()

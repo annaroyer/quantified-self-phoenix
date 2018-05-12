@@ -5,7 +5,7 @@ defmodule QsPhoenixWeb.FoodControllerTest do
 
   @create_attrs %{calories: 200, name: "Crackers"}
   @update_attrs %{calories: 243, name: "Chocolate Covered Banana"}
-  @no_name %{calories: 200}
+  @no_name %{calories: 400}
   @no_calories %{name: "Crackers"}
 
   def fixture(:food) do
@@ -21,15 +21,15 @@ defmodule QsPhoenixWeb.FoodControllerTest do
     test "lists all foods", %{conn: conn} do
       conn = get conn, food_path(conn, :index)
 
-      expected = [%{"id" => 1, "name" => "Banana", "calories" => 150},
-                  %{"id" => 2, "name" => "Bagel Bites - Four Cheese", "calories" => 650},
-                  %{"id" => 3, "name" => "Chicken Burrito", "calories" => 800},
-                  %{"id" => 4, "name" => "Yogurt", "calories" => 550},
-                  %{"id" => 5, "name" => "Gum", "calories" => 50},
-                  %{"id" => 6, "name" => "Cheese", "calories" => 400},
-                  %{"id" => 7, "name" => "Apple", "calories" => 220}]
+      all_foods = [%{"id" => 1, "name" => "Banana", "calories" => 150},
+                   %{"id" => 2, "name" => "Bagel Bites - Four Cheese", "calories" => 650},
+                   %{"id" => 3, "name" => "Chicken Burrito", "calories" => 800},
+                   %{"id" => 4, "name" => "Yogurt", "calories" => 550},
+                   %{"id" => 5, "name" => "Gum", "calories" => 50},
+                   %{"id" => 6, "name" => "Cheese", "calories" => 400},
+                   %{"id" => 7, "name" => "Apple", "calories" => 220}]
 
-      assert json_response(conn, 200) == expected
+      assert json_response(conn, 200) == all_foods
     end
   end
 
@@ -54,7 +54,7 @@ defmodule QsPhoenixWeb.FoodControllerTest do
   describe "create food" do
     test "renders food when data is valid", %{conn: conn} do
       conn = post conn, food_path(conn, :create), food: @create_attrs
-      assert %{"id" => 8, "name" => "Crackers", "calories" => 200} = json_response(conn, 201)
+      assert %{"id" => 8, "name" => "Crackers", "calories" => 200} == json_response(conn, 201)
     end
 
     test "renders errors when there is no name", %{conn: conn} do
@@ -68,25 +68,23 @@ defmodule QsPhoenixWeb.FoodControllerTest do
     end
   end
 
-  # describe "update food" do
-  #   setup [:create_food]
-  #
-  #   test "renders food when data is valid", %{conn: conn, food: %Food{id: id} = food} do
-  #     conn = put conn, food_path(conn, :update, food), food: @update_attrs
-  #     assert %{"id" => ^id} = json_response(conn, 200)["data"]
-  #
-  #     conn = get conn, food_path(conn, :show, id)
-  #     assert json_response(conn, 200)["data"] == %{
-  #       "id" => id,
-  #       "calories" => 43,
-  #       "name" => "some updated name"}
-  #   end
-  #
-  #   test "renders errors when data is invalid", %{conn: conn, food: food} do
-  #     conn = put conn, food_path(conn, :update, food), food: @invalid_attrs
-  #     assert json_response(conn, 422)["errors"] != %{}
-  #   end
-  # end
+  describe "update food" do
+    test "renders food when data is valid", %{conn: conn} do
+      choco_banana = %{"id" => 1,"calories" => 243,"name" => "Chocolate Covered Banana"}
+
+      conn = put conn, food_path(conn, :update, 1), food: @update_attrs
+      assert json_response(conn, 200) == choco_banana
+
+      conn = get build_conn(), food_path(build_conn(), :show, 1)
+      assert json_response(conn, 200) == choco_banana
+    end
+
+    test "returns a 404 when food with given id does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        put conn, food_path(conn, :update, 8), food: @update_attrs
+      end
+    end
+  end
   #
   # describe "delete food" do
   #   setup [:create_food]
