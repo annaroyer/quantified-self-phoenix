@@ -9,5 +9,6 @@ defmodule QsPhoenixWeb.Router do
     pipe_through :api
 
     resources "/foods", FoodController, except: [:new, :edit]
+    resources "/meals", MealController, only: [:index]
   end
 end
