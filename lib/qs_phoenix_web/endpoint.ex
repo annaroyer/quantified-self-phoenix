@@ -18,7 +18,7 @@ defmodule QsPhoenixWeb.Endpoint do
   plug Plug.Head
 
   plug CORSPlug, origin: ["http://localhost:8080",
-                          "https://annaroyer.github.io/quantifies-self-fe"]
+                          "https://annaroyer.github.io"]
 
   plug QsPhoenixWeb.Router
 
