@@ -17,7 +17,7 @@ Requires:
  * Elixir ~> 1.4
  * PostgreSQL
 
-## Tests
+### Tests
 
 * Run the test suite with `mix test`
 
