@@ -1,14 +1,25 @@
 # QsPhoenix
 
+An API serving endpoints for a Calorie Tracking Application. 
+See the project spec here: http://backend.turing.io/module4/projects/quantified-self/quantified-self
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
   * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
+  * Seed database with `mix ecto.seed` or run all three tasks at once with `mix ecto.migrate`
   * Start Phoenix endpoint with `mix phx.server`
 
 Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+### Documentation
+
+* To view the documentation of all existing endpoints, `open doc/index.html`
+
+### Production
+
+* This application is currently deployed at: https://morning-headland-81593.herokuapp.com/
+* It serves the API for this frontend: https://annaroyer.github.io/quantified-self-fe
 
 ## Learn more
 
