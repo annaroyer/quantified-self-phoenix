@@ -36,26 +36,11 @@ defmodule QsPhoenix.Meals do
       ** (Ecto.NoResultsError)
 
   """
-  def get_meal!(id), do: Repo.get!(Meal, id)
-
-  @doc """
-  Updates a meal.
-
-  ## Examples
-
-      iex> update_meal(meal, %{field: new_value})
-      {:ok, %Meal{}}
-
-      iex> update_meal(meal, %{field: bad_value})
-      {:error, %Ecto.Changeset{}}
-
-  """
-
-  def update_meal(%Meal{} = meal, attrs) do
-    meal
-    |> Meal.changeset(attrs)
-    |> Repo.update()
+  def get_meal!(id) do
+    Repo.get!(Meal, id)
+    |> Repo.preload(:foods)
   end
+
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking meal changes.
