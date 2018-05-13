@@ -17,6 +17,9 @@ defmodule QsPhoenixWeb.Endpoint do
   plug Plug.MethodOverride
   plug Plug.Head
 
+  plug CORSPlug, origin: ["http://localhost:8080",
+                          "https://annaroyer.github.io/quantifies-self-fe"]
+
   plug QsPhoenixWeb.Router
 
   @doc """
