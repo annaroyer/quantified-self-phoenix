@@ -1,16 +1,6 @@
 defmodule QsPhoenixWeb.MealFoodControllerTest do
   use QsPhoenixWeb.ConnCase
 
-  # alias QsPhoenix.Meals
-  # alias QsPhoenix.Meals.MealFood
-  #
-  @create_attrs %{meal_id: 1, food_id: 4}
-
-  # def fixture(:meal_food) do
-  #   {:ok, meal_food} = Meals.create_meal_food(@create_attrs)
-  #   meal_food
-  # end
-
   setup %{conn: conn} do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
@@ -35,21 +25,21 @@ defmodule QsPhoenixWeb.MealFoodControllerTest do
       end
     end
   end
-  #
-  # describe "delete meal_food" do
-  #   setup [:create_meal_food]
-  #
-  #   test "deletes chosen meal_food", %{conn: conn, meal_food: meal_food} do
-  #     conn = delete conn, meal_food_path(conn, :delete, meal_food)
-  #     assert response(conn, 204)
-  #     assert_error_sent 404, fn ->
-  #       get conn, meal_food_path(conn, :show, meal_food)
-  #     end
-  #   end
-  # end
-  #
-  # defp create_meal_food(_) do
-  #   meal_food = fixture(:meal_food)
-  #   {:ok, meal_food: meal_food}
-  # end
+
+  describe "delete meal_food" do
+    test "deletes chosen meal_food", %{conn: conn} do
+      conn = delete conn, meal_food_path(conn, :delete, 1, 1)
+      assert %{"message" => "Successfully removed Banana from Breakfast"} = json_response(conn, 200)
+
+      conn = get conn, meal_path(conn, :show, 1)
+      breakfast_foods = Enum.map(json_response(conn, 200)["foods"], fn(food) -> food["name"] end)
+      assert breakfast_foods == ["Yogurt", "Apple"]
+    end
+
+    test "returns a 404 if meal_food does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        delete conn, meal_food_path(conn, :delete, 1, 3)
+      end
+    end
+  end
 end

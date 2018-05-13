@@ -88,17 +88,4 @@ defmodule QsPhoenix.Foods do
   def delete_food(%Food{} = food) do
     Repo.delete(food)
   end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking food changes.
-
-  ## Examples
-
-      iex> change_food(food)
-      %Ecto.Changeset{source: %Food{}}
-
-  """
-  def change_food(%Food{} = food) do
-    Food.changeset(food, %{})
-  end
 end

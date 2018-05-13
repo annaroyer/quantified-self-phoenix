@@ -15,7 +15,7 @@ defmodule QsPhoenixWeb.Router do
       get "/", MealController, :show
 
       post "/:id", MealFoodController, :create
-      resources "/:id", MealFoodController, only: [:delete, :show]
+      delete "/:id", MealFoodController, :delete
     end
   end
 end

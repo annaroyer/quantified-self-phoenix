@@ -4,10 +4,8 @@ defmodule QsPhoenix.MealsTest do
   alias QsPhoenix.Meals
 
   describe "meals" do
-    alias QsPhoenix.Meals.Meal
 
     @valid_attrs %{name: "some name"}
-    @update_attrs %{name: "some updated name"}
     @invalid_attrs %{name: nil}
 
     test "list_meals/0 returns all meals" do
@@ -28,20 +26,20 @@ defmodule QsPhoenix.MealsTest do
   describe "meal_foods" do
     alias QsPhoenix.Meals.MealFood
 
-    @valid_attrs %{meal_id: 1, food_id: 7}
-    @update_attrs %{}
-    @invalid_attrs %{}
-  #
-  #   def meal_food_fixture(attrs \\ %{}) do
-  #     {:ok, meal_food} =
-  #       attrs
-  #       |> Enum.into(@valid_attrs)
-  #       |> Meals.create_meal_food()
-  #
-  #     meal_food
-  #   end
+    @valid_attrs %{meal_id: 3, food_id: 6}
+    @find_attrs [meal_id: 3, food_id: 6]
+
+    def meal_food_fixture(attrs \\ %{}) do
+      {:ok, meal_food} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Meals.create_meal_food()
+
+      meal_food
+    end
 
     test "create_meal_food/1 with valid data creates a meal_food" do
+      meal_food = meal_food_fixture()
       assert {:ok, %MealFood{} = meal_food} = Meals.create_meal_food(@valid_attrs)
     end
 
@@ -51,15 +49,15 @@ defmodule QsPhoenix.MealsTest do
       end
     end
 
-  #   test "delete_meal_food/1 deletes the meal_food" do
-  #     meal_food = meal_food_fixture()
-  #     assert {:ok, %MealFood{}} = Meals.delete_meal_food(meal_food)
-  #     assert_raise Ecto.NoResultsError, fn -> Meals.get_meal_food!(meal_food.id) end
-  #   end
-  #
-  #   test "change_meal_food/1 returns a meal_food changeset" do
-  #     meal_food = meal_food_fixture()
-  #     assert %Ecto.Changeset{} = Meals.change_meal_food(meal_food)
-  #   end
+    test "delete_meal_food/1 deletes the meal_food" do
+      meal_food = meal_food_fixture()
+      assert {:ok, %MealFood{}} = Meals.delete_meal_food(meal_food)
+      assert_raise Ecto.NoResultsError, fn -> Meals.get_meal_food!(@find_attrs) end
+    end
+
+    test "get_meal_food!/1 returns the meal_food with given meal_id and food_id" do
+      meal_food = meal_food_fixture()
+      assert Meals.get_meal_food!(@find_attrs).id == meal_food.id
+    end
   end
 end
