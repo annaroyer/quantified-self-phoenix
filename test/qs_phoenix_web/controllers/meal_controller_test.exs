@@ -37,4 +37,17 @@ defmodule QsPhoenixWeb.MealControllerTest do
       assert json_response(conn, 200) == @meals
     end
   end
+
+  describe "show" do
+    test "shows meal with given id", %{conn: conn} do
+      conn = get conn, meal_meal_path(conn, :show, 1)
+      assert json_response(conn, 200) == List.first(@meals)
+    end
+
+    test "renders 404 when meal with given id does not exist", %{conn: conn} do
+      assert_error_sent :not_found, fn ->
+        get conn, meal_meal_path(conn, :show, 8)
+      end
+    end
+  end
 end
