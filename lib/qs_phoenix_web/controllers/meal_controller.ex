@@ -2,7 +2,6 @@ defmodule QsPhoenixWeb.MealController do
   use QsPhoenixWeb, :controller
 
   alias QsPhoenix.Meals
-  alias QsPhoenix.Meals.Meal
 
   action_fallback QsPhoenixWeb.FallbackController
 

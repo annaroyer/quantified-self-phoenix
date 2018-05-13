@@ -16,11 +16,6 @@ defmodule QsPhoenix.MealsTest do
       meals = Meals.list_meals()
       assert Meals.get_meal!(1) == List.first(meals)
     end
-
-    # test "change_meal/1 returns a meal changeset" do
-    #   meal = meal_fixture()
-    #   assert %Ecto.Changeset{} = Meals.change_meal(meal)
-    # end
   end
 
   describe "meal_foods" do
@@ -39,8 +34,7 @@ defmodule QsPhoenix.MealsTest do
     end
 
     test "create_meal_food/1 with valid data creates a meal_food" do
-      meal_food = meal_food_fixture()
-      assert {:ok, %MealFood{} = meal_food} = Meals.create_meal_food(@valid_attrs)
+      assert {:ok, %MealFood{}} = Meals.create_meal_food(@valid_attrs)
     end
 
     test "create_meal_food/1 with invalid data returns error changeset" do

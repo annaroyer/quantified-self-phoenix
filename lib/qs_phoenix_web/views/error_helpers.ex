@@ -3,7 +3,4 @@ defmodule QsPhoenixWeb.ErrorHelpers do
   Conveniences for translating and building error messages.
   """
 
-  @doc """
-  Translates an error message using gettext.
-  """
 end

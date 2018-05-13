@@ -11,7 +11,7 @@ defmodule QsPhoenixWeb.MealFoodController do
     food_name = Foods.get_food!(id).name
     meal_name = Meals.get_meal!(meal_id).name
 
-    with {:ok, %MealFood{} = meal_food} <- Meals.create_meal_food(%{meal_id: meal_id, food_id: id}) do
+    with {:ok, %MealFood{}} <- Meals.create_meal_food(%{meal_id: meal_id, food_id: id}) do
       conn
       |> put_status(:created)
       |> render("show.json", message: "Successfully added #{food_name} to #{meal_name}")
