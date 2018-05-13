@@ -10,7 +10,15 @@ defmodule QsPhoenix.Mixfile do
       compilers: [:phoenix] ++ Mix.compilers,
       start_permanent: Mix.env == :prod,
       aliases: aliases(),
-      deps: deps()
+      deps: deps(),
+
+      #Docs
+      name: "QsPhoenix",
+      source_url: "https://github.com/annaroyer/quantified-self-phoenix",
+      homepage_url: "https://annaroyer.github.io/quantified-self-fe",
+      docs: [main: "QsPhoenix",
+             extras: ["README.md"]
+            ]
     ]
   end
 
@@ -37,7 +45,8 @@ defmodule QsPhoenix.Mixfile do
       {:phoenix_ecto, "~> 3.2"},
       {:postgrex, ">= 0.0.0"},
       {:cowboy, "~> 1.0"},
-      {:cors_plug, "~> 1.5"}
+      {:cors_plug, "~> 1.5"},
+      {:ex_doc, "~> 0.16", only: :dev, runtime: false}
     ]
   end
 
