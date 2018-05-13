@@ -41,21 +41,6 @@ defmodule QsPhoenix.Meals do
     |> Repo.preload(:foods)
   end
 
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking meal changes.
-
-  ## Examples
-
-      iex> change_meal(meal)
-      %Ecto.Changeset{source: %Meal{}}
-
-  """
-
-  def change_meal(%Meal{} = meal) do
-    Meal.changeset(meal, %{})
-  end
-
   alias QsPhoenix.Meals.MealFood
 
   @doc """
@@ -76,6 +61,25 @@ defmodule QsPhoenix.Meals do
     |> Repo.insert()
   end
 
+
+  @doc """
+  Gets a single meal_food.
+
+  Raises `Ecto.NoResultsError` if the MealFood does not exist.
+
+  ## Examples
+
+      iex> get_meal_food!(123)
+      %Meal{}
+
+      iex> get_meal_food!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_meal_food!(attrs) do
+    Repo.one!(from MealFood, where: ^attrs, preload: [:food, :meal])
+  end
+
   @doc """
   Deletes a MealFood.
 
@@ -88,20 +92,8 @@ defmodule QsPhoenix.Meals do
       {:error, %Ecto.Changeset{}}
 
   """
+
   def delete_meal_food(%MealFood{} = meal_food) do
-    Repo.delete(meal_food)
-  end
-
-  @doc """
-  Returns an `%Ecto.Changeset{}` for tracking meal_food changes.
-
-  ## Examples
-
-      iex> change_meal_food(meal_food)
-      %Ecto.Changeset{source: %MealFood{}}
-
-  """
-  def change_meal_food(%MealFood{} = meal_food) do
-    MealFood.changeset(meal_food, %{})
+    Repo.delete meal_food
   end
 end
