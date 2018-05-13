@@ -9,8 +9,13 @@ defmodule QsPhoenixWeb.Router do
     pipe_through :api
 
     resources "/foods", FoodController, except: [:new, :edit]
-    resources "/meals", MealController, only: [:index] do
-      get "/foods", MealController, :show
+    resources "/meals", MealController, only: [:index]
+
+    scope "/meals/:meal_id/foods" do
+      get "/", MealController, :show
+
+      post "/:id", MealFoodController, :create
+      resources "/:id", MealFoodController, only: [:delete, :show]
     end
   end
 end
