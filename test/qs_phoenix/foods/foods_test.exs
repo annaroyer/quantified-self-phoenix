@@ -51,16 +51,11 @@ defmodule QsPhoenix.FoodsTest do
       assert {:error, %{}} = Foods.update_food(food, @invalid_attrs)
       assert food == Foods.get_food!(food.id)
     end
-    #
-    # test "delete_food/1 deletes the food" do
-    #   food = food_fixture()
-    #   assert {:ok, %Food{}} = Foods.delete_food(food)
-    #   assert_raise Ecto.NoResultsError, fn -> Foods.get_food!(food.id) end
-    # end
-    #
-    # test "change_food/1 returns a food changeset" do
-    #   food = food_fixture()
-    #   assert %Ecto.Changeset{} = Foods.change_food(food)
-    # end
+
+    test "delete_food/1 deletes the food" do
+      food = food_fixture()
+      assert {:ok, %Food{}} = Foods.delete_food(food)
+      assert_raise Ecto.NoResultsError, fn -> Foods.get_food!(food.id) end
+    end
   end
 end
