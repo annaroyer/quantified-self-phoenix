@@ -10,8 +10,6 @@ defmodule QsPhoenix.Foods.Food do
     field :name, :string
 
     timestamps()
-
-    many_to_many :meals, Meal, join_through: "meal_foods"
   end
 
   @doc false

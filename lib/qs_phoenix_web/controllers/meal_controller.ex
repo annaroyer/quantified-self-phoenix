@@ -11,8 +11,8 @@ defmodule QsPhoenixWeb.MealController do
     render(conn, "index.json", meals: meals)
   end
 
-  # def show(conn, %{"id" => id}) do
-  #   meal = Meals.get_meal!(id)
-  #   render(conn, "show.json", meal: meal)
-  # end
+  def show(conn, %{"meal_id" => id}) do
+    meal = Meals.get_meal!(id)
+    render(conn, "show.json", meal: meal)
+  end
 end

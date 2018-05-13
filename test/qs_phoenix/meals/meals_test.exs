@@ -14,11 +14,11 @@ defmodule QsPhoenix.MealsTest do
       assert Enum.count(Meals.list_meals()) == 4
     end
 
-    # test "get_meal!/1 returns the meal with given id" do
-    #   meal = meal_fixture()
-    #   assert Meals.get_meal!(meal.id) == meal
-    # end
-    #
+    test "get_meal!/1 returns the meal with given id" do
+      meals = Meals.list_meals()
+      assert Meals.get_meal!(1) == List.first(meals)
+    end
+
     # test "change_meal/1 returns a meal changeset" do
     #   meal = meal_fixture()
     #   assert %Ecto.Changeset{} = Meals.change_meal(meal)
