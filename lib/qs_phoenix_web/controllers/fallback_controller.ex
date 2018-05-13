@@ -6,7 +6,7 @@ defmodule QsPhoenixWeb.FallbackController do
   """
   use QsPhoenixWeb, :controller
 
-  def call(conn, {:error, %Ecto.Changeset{} = changeset}) do
+  def call(conn, {:error, %Ecto.Changeset{}}) do
     send_resp(conn, :bad_request, "")
   end
 

@@ -2,7 +2,7 @@ defmodule QsPhoenix.Meals.MealFood do
   use Ecto.Schema
   import Ecto.Changeset
 
-  alias QsPhoenix.Meals.{MealFood, Meal}
+  alias QsPhoenix.Meals.Meal
   alias QsPhoenix.Foods.Food
 
   schema "meal_foods" do
