@@ -1,7 +1,8 @@
 use Mix.Config
 
-config :qs_phoenix, QsPhoenix.Endpoint,
+config :qs_phoenix, QsPhoenixWeb.Endpoint,
   http: [port: {:system, "PORT"}],
+  load_from_system_env: true,
   url: [scheme: "https", host: "morning-headland-81593.herokuapp.com", port: 443],
   force_ssl: [rewrite_on: [:x_forwarded_proto]],
   secret_key_base: System.get_env("SECRET_KEY_BASE")
